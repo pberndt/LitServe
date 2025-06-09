@@ -1,4 +1,4 @@
-from multiprocessing import Manager
+from multiprocessing.managers import BaseManager as Manager
 from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
@@ -15,6 +15,9 @@ class TransportConfig(BaseModel):
     consumer_id: Optional[int] = None
     frontend_address: Optional[str] = None
     backend_address: Optional[str] = None
+
+    class Config:
+        arbitrary_types_allowed = True
 
 
 def _create_zmq_transport(config: TransportConfig):
