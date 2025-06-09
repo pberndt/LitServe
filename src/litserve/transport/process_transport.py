@@ -1,13 +1,14 @@
 import asyncio
 from contextlib import suppress
-from multiprocessing import Manager, Queue
+from multiprocessing import Queue
+from multiprocessing.managers import BaseManager
 from typing import Any, List, Optional
 
 from litserve.transport.base import MessageTransport
 
 
 class MPQueueTransport(MessageTransport):
-    def __init__(self, manager: Manager, queues: List[Queue]):
+    def __init__(self, manager: BaseManager, queues: List[Queue]):
         self._queues = queues
         self._closed = False
 

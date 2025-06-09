@@ -251,6 +251,12 @@ class BaseRequestHandler(ABC):
         """Common request preparation logic."""
         if request_type == Request:
             content_type = request.headers.get("Content-Type", "")
+            if content_type.startswith("text/csv"):
+                charset = "utf-8"
+                if "charset=" in content_type:
+                    charset = content_type.split("charset=")[-1].split(";")[0].strip()
+                body = await request.body()
+                return body.decode(charset)
             if content_type == "application/x-www-form-urlencoded" or content_type.startswith("multipart/form-data"):
                 return await request.form()
             return await request.json()
@@ -814,7 +820,7 @@ class LitServer:
             time.sleep(0.05)
         logger.debug("One or more workers are ready to serve requests")
 
-    def _init_manager(self, num_api_servers: int):
+    def _init_manager(self, num_api_servers: int) -> mp.managers.BaseManager:
         manager = mp.Manager()
         self.transport_config.manager = manager
         self.transport_config.num_consumers = num_api_servers
@@ -833,7 +839,7 @@ class LitServer:
 
     def _perform_graceful_shutdown(
         self,
-        manager: mp.Manager,
+        manager: mp.managers.BaseManager,
         uvicorn_workers: List[Union[mp.Process, threading.Thread]],
         inference_workers: List[mp.Process],
         shutdown_reason: str = "normal",
