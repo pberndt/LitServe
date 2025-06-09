@@ -16,6 +16,7 @@ class TransportConfig(BaseModel):
     frontend_address: Optional[str] = None
     backend_address: Optional[str] = None
 
+
     class Config:
         arbitrary_types_allowed = True
 

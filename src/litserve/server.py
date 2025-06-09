@@ -254,9 +254,7 @@ class BaseRequestHandler(ABC):
             if content_type.startswith("text/csv"):
                 charset = "utf-8"
                 if "charset=" in content_type:
-                    charset = (
-                        content_type.split("charset=")[-1].split(";")[0].strip()
-                    )
+                    charset = content_type.split("charset=")[-1].split(";")[0].strip()
                 body = await request.body()
                 return body.decode(charset)
             if content_type == "application/x-www-form-urlencoded" or content_type.startswith("multipart/form-data"):
