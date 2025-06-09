@@ -5,7 +5,12 @@ from litserve.test_examples.openai_spec_example import (
     TestAPIWithStructuredOutput,
     TestAPIWithToolCalls,
 )
-from litserve.test_examples.simple_example import SimpleBatchedAPI, SimpleLitAPI, SimpleStreamAPI, SimpleTorchAPI
+from litserve.test_examples.simple_example import (
+    SimpleBatchedAPI,
+    SimpleLitAPI,
+    SimpleStreamAPI,
+    SimpleTorchAPI,
+)
 from litserve.test_examples.csv_echo import CSVEchoAPI
 
 __all__ = [

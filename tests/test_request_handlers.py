@@ -97,6 +97,7 @@ async def test_request_handler_streaming(mock_event, mock_lit_api):
     assert mock_server.request_queue.qsize() == 1
     assert response == "test-response"
 
+
 @pytest.mark.asyncio
 async def test_prepare_request_csv_utf8(mock_lit_api):
     csv_text = "a,b\n1,2\nö,ä"
