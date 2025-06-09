@@ -254,13 +254,7 @@ class BaseRequestHandler(ABC):
             if content_type == "application/x-www-form-urlencoded" or content_type.startswith("multipart/form-data"):
                 return await request.form()
             if content_type.startswith("text/csv"):
-                encoding = "utf-8"
-                for part in content_type.split(";"):
-                    part = part.strip()
-                    if part.startswith("charset="):
-                        encoding = part.split("=", 1)[1]
-                        break
-                return (await request.body()).decode(encoding)
+                return request
             return await request.json()
         return request
 
