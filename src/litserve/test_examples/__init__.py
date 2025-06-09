@@ -6,6 +6,7 @@ from litserve.test_examples.openai_spec_example import (
     TestAPIWithToolCalls,
 )
 from litserve.test_examples.simple_example import SimpleBatchedAPI, SimpleLitAPI, SimpleStreamAPI, SimpleTorchAPI
+from litserve.test_examples.csv_example import CSVEchoAPI
 
 __all__ = [
     "SimpleLitAPI",
@@ -17,4 +18,5 @@ __all__ = [
     "TestAPIWithToolCalls",
     "OpenAIBatchContext",
     "SimpleStreamAPI",
+    "CSVEchoAPI",
 ]
